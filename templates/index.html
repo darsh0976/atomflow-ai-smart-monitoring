@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{ context.name }} - Smart Monitoring Dashboard</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+  <header class="hero">
+    <p class="badge">{{ context.mode }} • {{ context.domain }}</p>
+    <h1>{{ context.name }}</h1>
+    <p class="subtitle">Built as a last-mile, production-style submission dashboard for fast execution.</p>
+  </header>
+
+  <main class="grid">
+    <section class="card">
+      <h2>Competition Snapshot</h2>
+      <ul>
+        <li><strong>Organizer:</strong> {{ context.organizer }}</li>
+        <li><strong>Team Size:</strong> {{ context.team_size }}</li>
+        <li><strong>Contact:</strong> {{ context.contact }}</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>Eligibility</h2>
+      <ul>
+        {% for item in context.eligibility %}
+          <li>{{ item }}</li>
+        {% endfor %}
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>Deadlines</h2>
+      <ul>
+        <li><strong>Registration Deadline:</strong> 15 May 2026, 11:59 PM IST</li>
+        <li><strong>Submission Window:</strong> 16 May 2026, 12:00 AM IST → 18 May 2026, 08:00 AM IST</li>
+        <li><strong>Final Round:</strong> 22 May 2026, 12:00 AM IST → 24 May 2026, 12:01 AM IST</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>Prize Pool</h2>
+      <div class="prizes">
+        {% for p in context.prizes %}
+          <div class="prize">
+            <h3>{{ p.position }}</h3>
+            <p>{{ p.amount }}</p>
+            <span>PPI Opportunity Included</span>
+          </div>
+        {% endfor %}
+      </div>
+    </section>
+
+    <section class="card wide">
+      <h2>Submission Checklist (Execution Mode)</h2>
+      <ol>
+        <li>Publish the working application URL.</li>
+        <li>Push complete source code to GitHub/GitLab/Bitbucket.</li>
+        <li>Attach architecture diagram showing ingestion, processing, and dashboarding layers.</li>
+        <li>Document cost optimization choices and performance safeguards.</li>
+        <li>Smoke test UI/UX on desktop + mobile and verify final links.</li>
+      </ol>
+      <p class="stamp">Dashboard generated at {{ generated_at }}</p>
+    </section>
+  </main>
+</body>
+</html>
